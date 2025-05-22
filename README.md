@@ -40,31 +40,35 @@ This model is common in real-world systems like web servers, background processo
 ## Analysis
 
 ### Time Complexity
-	• Production and consumption: O(1) per operation (insertion or removal from the queue).
-	• However, the total execution time depends on the simulated (random) delays.
-	• Thanks to thread synchronization using mutexes and condition variables, the shared queue is accessed in a safe and efficient manner, even with multiple threads running concurrently.
+
+Production and consumption: O(1) per operation (insertion or removal from the queue). However, the total execution time depends on the simulated (random) delays. Thanks to thread synchronization using mutexes and condition variables, the shared queue is accessed in a safe and efficient manner, even with multiple threads running concurrently.
 
 The O(1) complexity comes from the underlying queue data structure (std::queue in C++), which allows constant-time insertion and deletion. The use of threads does not change this complexity—it simply enables operations to occur concurrently. Proper synchronization ensures that these O(1) operations remain correct and do not result in race conditions.
 
 ### Other possible paradigms tha could solve the problem
 
-* Logic (Prolog)
+#### Logic (Prolog)
 Viable here: No
 Not suitable for concurrency or dynamic I/O handling.
 
-* Scripting (Shell)
+#### Scripting (Shell)
 Viable here: No
+
 Difficult to coordinate multiple tasks with precise synchronization.
 
-* Functional (Scheme)
+#### Functional (Scheme)
 Viable here: Partially
+
 Possible with functional threads, but complex to manage shared resources.
 
-* Parallel (OpenMP)
+#### Parallel (OpenMP)
 Viable here: Yes
+
 Suitable if processing were purely parallel without shared queues.
 
- • Logic Programming (Prolog): Great for rule-based problems, but not designed for concurrent operations or real-time data flow.
- • Scripting (Shell): Useful for automation and simple task pipelines, but lacks the tools for fine-grained thread control or shared data protection.
- • Functional Programming (Scheme): Supports concurrency through immutability and pure functions, but sharing mutable state (like a queue) is tricky and error-prone.
- • Parallel Programming (OpenMP): Effective for data-parallel tasks (e.g., matrix operations), but less ideal for producer-consumer patterns that require shared state coordination.
+### Explanation:
+
+ * Logic Programming (Prolog): Great for rule-based problems, but not designed for concurrent operations or real-time data flow.
+ * Scripting (Shell): Useful for automation and simple task pipelines, but lacks the tools for fine-grained thread control or shared data protection.
+ * Functional Programming (Scheme): Supports concurrency through immutability and pure functions, but sharing mutable state (like a queue) is tricky and error-prone.
+ * Parallel Programming (OpenMP): Effective for data-parallel tasks (e.g., matrix operations), but less ideal for producer-consumer patterns that require shared state coordination.
