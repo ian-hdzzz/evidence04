@@ -64,7 +64,7 @@ We'll need a C++ compiler with C++11 support or higher (like g++), compatible wi
 
 ### Example Output
 
-<img src="./test.png" alt="Descripción" width="300"/>
+<img src="./test.png" alt="Descripción" width="500"/>
 
 ## Analysis
 
