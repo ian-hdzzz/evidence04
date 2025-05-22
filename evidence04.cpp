@@ -7,44 +7,54 @@
 #include <chrono>
 #include <atomic>
 #include <random>
+#include <vector>
 
 std::mutex mtx;
 std::condition_variable cv;
 std::queue<std::string> imageQueue;
-const int MAX_IMAGES = 10;
 std::atomic<bool> producersDone(false);
+std::atomic<int> totalGenerated(0);
+std::atomic<int> totalProcessed(0);
 
+// Función simulada para "producir" una imagen
 std::string generateImage(int id) {
-    return "image_" + std::to_string(id);
+    return "Image " + std::to_string(id);
 }
 
+// Función del hilo productor
 void producer(int id, int numImages) {
     for (int i = 0; i < numImages; ++i) {
         std::string image = generateImage(id * 100 + i);
         std::this_thread::sleep_for(std::chrono::milliseconds(100 + rand() % 200));
+
         {
             std::unique_lock<std::mutex> lock(mtx);
             imageQueue.push(image);
-            std::cout << "[Producer " << id << "] Generated " << image << "\n";
+            std::cout << "[Producer " << id << "] Generated: " << image << "\n";
+            totalGenerated++;
         }
+
         cv.notify_one();
     }
 }
 
+// Función del hilo consumidor
 void consumer(int id) {
     while (true) {
         std::unique_lock<std::mutex> lock(mtx);
+
         cv.wait(lock, [] {
             return !imageQueue.empty() || producersDone;
         });
+
         if (!imageQueue.empty()) {
             std::string image = imageQueue.front();
             imageQueue.pop();
             lock.unlock();
 
-            std::cout << "  [Consumer " << id << "] Processing " << image << "...\n";
+            std::cout << "[Consumer " << id << "] Processing: " << image << "\n";
             std::this_thread::sleep_for(std::chrono::milliseconds(300 + rand() % 300));
-            std::cout << "  [Consumer " << id << "] Done with " << image << "\n";
+            totalProcessed++;
         } else if (producersDone) {
             break;
         }
@@ -54,7 +64,7 @@ void consumer(int id) {
 int main() {
     const int NUM_PRODUCERS = 2;
     const int NUM_CONSUMERS = 2;
-    const int IMAGES_PER_PRODUCER = 5;
+    const int IMAGES_PER_PRODUCER = 25;
 
     std::vector<std::thread> producers;
     std::vector<std::thread> consumers;
@@ -78,6 +88,8 @@ int main() {
         t.join();
     }
 
-    std::cout << "\nAll images processed successfully.\n";
+    std::cout << "\n[Summary] Total Images Generated: " << totalGenerated.load() << "\n";
+    std::cout << "[Summary] Total Images Processed: " << totalProcessed.load() << "\n";
+
     return 0;
 }

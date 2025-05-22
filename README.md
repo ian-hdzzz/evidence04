@@ -6,8 +6,25 @@ This project simulates an application that receives and processes images concurr
 
 This pattern is widely used in real-time data processing systems, web servers, multimedia, streaming applications, and concurrent back-end systems.
 
+Goals:
+	•	Safety: Ensure correct access to shared resources without race conditions.
+	•	Fairness: Serve image requests in order of arrival (FIFO).
+	•	Efficiency: Maximize resource utilization and responsiveness through multithreading.
 
-##  Models
+### System Overview
+1. Core Components
+	•	Producers: Threads that simulate new image generation requests at random intervals.
+	•	Consumers: Threads that process each image request with a simulated delay.
+	•	Shared Queue: A synchronized queue used to store and retrieve image tasks safely.
+	•	Mutex and Condition Variable: Ensure safe concurrent access and control over thread waiting/wakeup.
+
+2. Operational Flow
+	1.	Multiple producer threads generate tasks (e.g., "Image 1", "Image 2"…) and push them to the queue.
+	2.	Consumer threads wait for tasks. When available, they pop and simulate processing them.
+	3.	If the queue is empty, consumers wait until a new task arrives.
+	4.	Mutex locks and condition variables ensure no race conditions occur during access.
+
+##  Model
 Paradigm: Concurrent Programming in C++
 
 ### Why Concurrent Programming?
@@ -31,11 +48,22 @@ This model is common in real-world systems like web servers, background processo
 	•	Prolog para programación lógica.
 	•	Java/C++/Python para POO.
 
- ## Test
-	•	Implementa y documenta pruebas:
-	•	Casos base, normales y extremos.
-	•	Usa asserts, frameworks o pruebas manuales documentadas.
-	•	Muestra que tu programa funciona correctamente.
+## Test
+### Test Cases
+	•	Multiple Producers, Single Consumer
+	→ Ensures proper queuing and wake-up.
+	•	Single Producer, Multiple Consumers
+	→ Confirms fair consumption and no starvation.
+	•	Empty Queue Handling
+	→ Consumers wait without errors until data is available.
+
+### Validation Metrics
+	•	All generated images are processed.
+	•	No data races or crashes observed under stress testing.
+	•	Final queue is empty after all tasks are completed.
+
+### Example Output
+![Test](./test.png)
 
 ## Analysis
 
@@ -49,6 +77,7 @@ The O(1) complexity comes from the underlying queue data structure (std::queue i
 
 #### Logic (Prolog)
 Viable here: No
+
 Not suitable for concurrency or dynamic I/O handling.
 
 #### Scripting (Shell)
