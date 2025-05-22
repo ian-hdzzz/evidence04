@@ -63,7 +63,8 @@ We'll need a C++ compiler with C++11 support or higher (like g++), compatible wi
 	• Final queue is empty after all tasks are completed.
 
 ### Example Output
-![Test](./test.png)
+
+<img src="./test.png" alt="Descripción" width="300"/>
 
 ## Analysis
 
