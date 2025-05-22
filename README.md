@@ -37,30 +37,29 @@ Concurrent programming allows us to:
 
 This model is common in real-world systems like web servers, background processors, or live data streams, where different tasks must run simultaneously and communicate safely.
 
+Here's a diagram of the solution for a better understanding
+![diagram](./diagram.png)
+
 ### Key Concepts Used:
-	• thread – Used to launch multiple producer and consumer threads.
-	• mutex – Ensures only one thread accesses the shared queue at a time (prevents race conditions).
-	• condition_variable – Lets threads wait and notify each other efficiently (e.g., consumers wait until the queue has images).
+	• Thread – Used to launch multiple producer and consumer threads.
+	• Mutex – Ensures only one thread accesses the shared queue at a time (prevents race conditions).
+	• Condition_variable – Lets threads wait and notify each other efficiently (e.g., consumers wait until the queue has images).
 
 ## Implementation
-	•	Programa la solución en un lenguaje que soporte el paradigma elegido:
-	•	Ej. Python para programación funcional o imperativa.
-	•	Prolog para programación lógica.
-	•	Java/C++/Python para POO.
+The solution is implemented in C++, leveraging its robust support for the concurrent programming paradigm. This allows the use of threads, mutexes, condition variables, and atomic operations to manage synchronization, ensure safe access to shared resources, and simulate real-world parallel execution effectively.
+
+We'll need a C++ compiler with C++11 support or higher (like g++), compatible with Linux, macOS, or Windows with a terminal, then we'll run de program either in the compailer or from the console with g++ evidence04.cpp -o evidence04 and then ./evidence04
 
 ## Test
 ### Test Cases
-	•	Multiple Producers, Single Consumer
-	→ Ensures proper queuing and wake-up.
-	•	Single Producer, Multiple Consumers
-	→ Confirms fair consumption and no starvation.
-	•	Empty Queue Handling
-	→ Consumers wait without errors until data is available.
+	• Multiple Producers, Single Consumer: Ensures proper queuing and wake-up.
+	• Single Producer, Multiple Consumers: Confirms fair consumption and no starvation.
+	• Empty Queue Handling: Consumers wait without errors until data is available.
 
 ### Validation Metrics
-	•	All generated images are processed.
-	•	No data races or crashes observed under stress testing.
-	•	Final queue is empty after all tasks are completed.
+	• All generated images are processed.
+	• No data races or crashes observed under stress testing.
+	• Final queue is empty after all tasks are completed.
 
 ### Example Output
 ![Test](./test.png)
