@@ -37,7 +37,8 @@ Concurrent programming allows us to:
 
 This model is common in real-world systems like web servers, background processors, or live data streams, where different tasks must run simultaneously and communicate safely.
 
-Here's a diagram of the solution for a better understanding
+Here's a diagram of the solution for a better understanding of what we'll be doing
+
 ![diagram](./diagram.png)
 
 ### Key Concepts Used:
