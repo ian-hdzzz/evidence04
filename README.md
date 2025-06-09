@@ -54,40 +54,40 @@ We'll need a C++ compiler with C++11 support or higher (like g++), compatible wi
 ## Test
 ### Test Cases
 #### 1. Concurrent Access - Limited Capacity
-*Producers: 10
-*Consumers: 1
-*Images per producer: 5
+• Producers: 10
+• Consumers: 1
+• Images per producer: 5
 <img src="./test1.png" alt="Descripción" width="500"/>
 
 #### 2. Excess Producers over Consumers
-*Producers: 10
-*Consumers: 2
-*Images per producer: 5
+• Producers: 10
+• Consumers: 2
+• Images per producer: 5
 <img src="./test2.png" alt="Descripción" width="500"/>
 
 #### 3. Multiple Consumers - Few Producers
-*Producers: 2
-*Consumers: 10
-*Images per producer: 3
+• Producers: 2
+• Consumers: 10
+• Images per producer: 3
 <img src="./test3.png" alt="Descripción" width="500"/>
 
 #### 4. Balanced Distribution
-*Producers: 3
-*Consumers: 3
-*Images per producer: 4
+• Producers: 3
+• Consumers: 3
+• Images per producer: 4
 
 <img src="./test4.png" alt="Descripción" width="500"/>
 
 #### 5. Clean Termination - Stress Test
-*Producers: 5
-*Consumers: 3
-*Images per producer: 20 
+• Producers: 5
+• Consumers: 3
+• Images per producer: 20 
 <img src="./test5.png" alt="Descripción" width="500"/>
 
 #### 6. Single Producer - Multiple Consumers
-*Producers: 1
-*Consumers: 5
-*Images per producer: 10
+• Producers: 1
+• Consumers: 5
+• Images per producer: 10
 <img src="./test6.png" alt="Descripción" width="500"/>
 
 	• Multiple Producers, Single Consumer: Ensures proper queuing and wake-up.
