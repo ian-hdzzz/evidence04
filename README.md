@@ -133,6 +133,31 @@ Suitable if processing were purely parallel without shared queues.
  * Functional Programming (Scheme): Supports concurrency through immutability and pure functions, but sharing mutable state (like a queue) is tricky and error-prone.
  * Parallel Programming (OpenMP): Effective for data-parallel tasks (e.g., matrix operations), but less ideal for producer-consumer patterns that require shared state coordination.
 
+### Other possible solution: Racket
+#### Why Racket is a Good Alternative for Implementing Threads
+1. High-Level Abstractions
+Asynchronous Channels vs Mutex/Condition Variables
+C++ (Complex):
+```
+std::mutex mtx;
+std::condition_variable cv;
+std::queue<std::string> imageQueue;
+
+// Productor necesita lock manual
+{
+    std::unique_lock<std::mutex> lock(mtx);
+    imageQueue.push(image);
+}
+cv.notify_one();
+``` 
+
+Racket (Simple):
+```
+racket(define image-queue (make-async-channel))
+
+;; Thread-safe automáticamente
+(async-channel-put image-queue image)
+``` 
 
 ## References
 GeeksforGeeks. (2024a, septiembre 2). Functional Programming Paradigm. GeeksforGeeks. https://www.geeksforgeeks.org/functional-programming-paradigm/ 
