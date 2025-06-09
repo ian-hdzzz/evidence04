@@ -132,3 +132,13 @@ Suitable if processing were purely parallel without shared queues.
  * Scripting (Shell): Useful for automation and simple task pipelines, but lacks the tools for fine-grained thread control or shared data protection.
  * Functional Programming (Scheme): Supports concurrency through immutability and pure functions, but sharing mutable state (like a queue) is tricky and error-prone.
  * Parallel Programming (OpenMP): Effective for data-parallel tasks (e.g., matrix operations), but less ideal for producer-consumer patterns that require shared state coordination.
+
+
+## References
+GeeksforGeeks. (2024a, septiembre 2). Functional Programming Paradigm. GeeksforGeeks. https://www.geeksforgeeks.org/functional-programming-paradigm/ 
+
+GeeksforGeeks. (2025, 15 mayo). Multithreading in C++. GeeksforGeeks. https://www.geeksforgeeks.org/multithreading-in-cpp/
+
+GeeksforGeeks. (2023, 14 marzo). Difference between Process Image and Multi Thread Process image. GeeksforGeeks. https://www.geeksforgeeks.org/difference-between-process-image-and-multi-thread-process-image/
+
+Kuo, Y. (2025, 24 febrero). Multithreading with C++ —Producer-Consumer Problem | Nerd For Tech. Medium. https://medium.com/nerd-for-tech/hands-on-multithreading-with-c-04-producer-consumer-problem-26abdddc485d 
