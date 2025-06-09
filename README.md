@@ -51,7 +51,13 @@ The solution is implemented in C++, leveraging its robust support for the concur
 
 We'll need a C++ compiler with C++11 support or higher (like g++), compatible with Linux, macOS, or Windows with a terminal, then we'll run de program either in the compailer or from the console with g++ evidence04.cpp -o evidence04 and then ./evidence04
 
-## Test
+## Testing
+
+### Validation Metrics
+	• All generated images are processed.
+	• No data races or crashes observed under stress testing.
+	• Final queue is empty after all tasks are completed.
+
 ### Test Cases
 #### 1. Concurrent Access - Limited Capacity
  - Producers: 10
@@ -90,15 +96,6 @@ We'll need a C++ compiler with C++11 support or higher (like g++), compatible wi
  - Images per producer: 10
 <img src="./test6.png" alt="Descripción" width="500"/>
 
-	• Multiple Producers, Single Consumer: Ensures proper queuing and wake-up.
-	• Single Producer, Multiple Consumers: Confirms fair consumption and no starvation.
-	• Empty Queue Handling: Consumers wait without errors until data is available.
-### Validation Metrics
-	• All generated images are processed.
-	• No data races or crashes observed under stress testing.
-	• Final queue is empty after all tasks are completed.
-
-
 ## Analysis
 
 ### Time Complexity
@@ -109,22 +106,22 @@ The O(1) complexity comes from the underlying queue data structure (std::queue i
 
 ### Other possible paradigms tha could solve the problem
 
-#### Logic (Prolog)
+#### 1. Logic (Prolog)
 Viable here: No
 
 Not suitable for concurrency or dynamic I/O handling.
 
-#### Scripting (Shell)
+#### 2. Scripting (Shell)
 Viable here: No
 
 Difficult to coordinate multiple tasks with precise synchronization.
 
-#### Functional (Scheme)
+#### 3. Functional (Scheme)
 Viable here: Partially
 
 Possible with functional threads, but complex to manage shared resources.
 
-#### Parallel (OpenMP)
+#### 4. Parallel (OpenMP)
 Viable here: Yes
 
 Suitable if processing were purely parallel without shared queues.
