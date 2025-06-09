@@ -135,11 +135,11 @@ Suitable if processing were purely parallel without shared queues.
 
 ### Other possible solution: Racket
 #### Why Racket is a Good Alternative for Implementing Threads
-1. High-Level Abstractions
+#### 1. High-Level Abstractions
 Asynchronous Channels vs Mutex/Condition Variables
 C++ (Complex):
 
-```cpp
+```
 std::mutex mtx;
 std::condition_variable cv;
 std::queue<std::string> imageQueue;
@@ -153,13 +153,53 @@ cv.notify_one();
 ``` 
 
 Racket (Simple):
-```racket
+```
 racket(define image-queue (make-async-channel))
 
 ;; Thread-safe automáticamente
 (async-channel-put image-queue image)
 ``` 
 
+#### 2. Functional State Management
+Immutability by Default
+``` 
+;; Immutable sets for validation
+(define generated-images (mutable-set))
+(set-add! generated-images image)  ; Explicit modification
+
+;; Controlled shared variables
+(define total-generated (box 0))
+(set-box! total-generated (add1 (unbox total-generated)))
+Advantage: Immutability reduces concurrency errors. Mutations are explicit and controlled.
+``` 
+
+#### 5. Lower Error Proneness
+Deadlocks and Race Conditions
+
+Async channels eliminate many synchronization problems
+Immutability reduces race conditions
+High-level abstractions minimize low-level errors
+
+Robustness Example:
+``` 
+;; Safe polling without aggressive busy-waiting
+[(async-channel-try-get image-queue)
+ => (lambda (image) 
+      ;; process image
+      (loop))]
+[else
+ (sleep 0.01)  ; Controlled yield
+ (loop)]
+ ``` 
+
+ #### Conclusion
+Racket demonstrates that functional languages are not incompatible with concurrency. In fact, they offer:
+
+ - Safer abstractions (channels vs mutex)
+ - Less boilerplate code
+ - Smaller error surface (immutability)
+ - Better expressiveness (declarative syntax)
+ 
 ## References
 GeeksforGeeks. (2024a, septiembre 2). Functional Programming Paradigm. GeeksforGeeks. https://www.geeksforgeeks.org/functional-programming-paradigm/ 
 
