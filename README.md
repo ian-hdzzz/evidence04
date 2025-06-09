@@ -138,7 +138,8 @@ Suitable if processing were purely parallel without shared queues.
 1. High-Level Abstractions
 Asynchronous Channels vs Mutex/Condition Variables
 C++ (Complex):
-```
+
+```cpp
 std::mutex mtx;
 std::condition_variable cv;
 std::queue<std::string> imageQueue;
@@ -152,7 +153,7 @@ cv.notify_one();
 ``` 
 
 Racket (Simple):
-```
+```racket
 racket(define image-queue (make-async-channel))
 
 ;; Thread-safe automáticamente
